@@ -6,8 +6,10 @@ Build the /healthz endpoint for the TechTrends application. The endpoint should 
 
 - An HTTP 200 status code
 - A JSON response containing the result: OK - healthy message
-Configure this in the app.py
+- Configure this in the app.py
+
 ![healthz](images_project4/Healthz.JPG "healthz")
+
 
 ![metrics](images_project4/metrics.JPG "metrics")
 
@@ -35,11 +37,12 @@ docker logs 44e734df3f92540aca60137d175e5b6631b3181cfab2d9afbb2ea5e9a2ea803
 
 ## tag the image 
 - create a repository called techtrends in your docker hub account
-docker tag techtrends ernynany/techtrends:v1.0.0
+- docker tag techtrends ernynany/techtrends:v1.0.0
 
 ## Docker command to push the images to dockerhub 
 docker push ernynany/techtrends:v1.0.0
 
+```
 The push refers to repository [docker.io/ernynany/techtrends]
 cc9f3e418d44: Pushed
 b22588431674: Pushed 
@@ -55,7 +58,7 @@ bb2453e12947: Mounted from library/python
 c284f546974c: Mounted from library/python
 4efcd4003c84: Mounted from library/python
 v1.0.0: digest: sha256:6d27f9c9f66c8aa4aee94475d4c05c2fd0a4024aa0d4ffdda5a129ccaf5d5275 size: 3052
-
+```
 
 
 #STEP 2
@@ -63,21 +66,37 @@ v1.0.0: digest: sha256:6d27f9c9f66c8aa4aee94475d4c05c2fd0a4024aa0d4ffdda5a129cca
 1 Create a new repo 
 2. push your codes to the new repo 
 3. Add the docker token and GitHub encrypted secrets from the project directory Goto settings > secret > Actions > click New repository secret 
-4. create the techtrends-dockerhub.yml in the .github/workflows/ Might be created automatically when creating the github action. 
+4. create the techtrends-dockerhub.yml in the .github/workflows/
 5. Goto Github Actions and click on the create a new workflow yourself button
 
-![Docker_secret](https://github.com/Uchejen/techtrend_project/blob/main/screenshots/Docker_secret.PNG?raw=true)
+![build](images_project4/tokens.JPG "build")
+
+![build](images_project4/ci-github-actions.JPG "build")
 
 
 
 # STEP 3
 ## Kubernetetes Declarative Manifests
-Create a vigrant box and ssH into it
+Create a vigrant box and SSH into it
 
 vagrant up
 vagrant ssh
 
-![vagrantbox](https://github.com/Uchejen/techtrend_project/blob/main/screenshots/vagrantbox.PNG?raw=true)
+### Note:
+I had issues with vagrant on my workstation
+
+Error logs
+![Error](images_project4/error-logs-vagrant-up.JPG "Error")
+
+
+
+![build](images_project4/vagrant.JPG "build")
+
+work around
+- installed k3s on an already existing VM
+![k3s](images_project4/k3s-install.JPG "k3s")
+
+![nodes](images_project4/k8s-nodes.JPG "nodes")
 
 ## Deploy the kubernetes cluster and give yourself root access
 
@@ -87,19 +106,14 @@ sudo su
 ## Get all nodes
 kubectl get no
 
+![nodes](images_project4/k8s-nodes.JPG "nodes")
+
 ## Kubernetes Declarative manifest
+- deploy.yaml
+- service.yaml
+- namespace.yaml
 
-touch namespace.yaml
-touch deploy.yaml
-vim deploy.yaml
-touch service.yaml
-vim service.yaml
-
-
-kubectl apply -f namespace.yaml
-kubectl apply -f deploy.yaml
-kubectl apply -f service.yaml
-
+- kubectl apply -f ./kubernetes
 ## Get all KubeCtl namespace and get all running pods
 
 kubectl get all -n sandbox
@@ -107,10 +121,13 @@ kubectl get po -A
 
 # Step 4 : Helm Charts
 Create the required templates and all the yaml.files as stated in the project 
+- template folder
+- helm chart
+- values
 
 # Step 5: ArgoCD Continuous Delivery
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+- kubectl create namespace argocd
+- kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 ## Get all pods and get all services
 kubectl get po -n argocd
