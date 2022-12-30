@@ -1,0 +1,67 @@
+## Docker commands used to build the application 
+
+## Docker Login
+
+docker login
+
+## Commands used to build the application
+
+docker build -t techtrends .
+name --> docker.io/library/techtrends 
+
+## test and run the application 
+
+docker run -dp 7111:3111 techtrends
+
+
+## Docker run output ---> container id
+44e734df3f92540aca60137d175e5b6631b3181cfab2d9afbb2ea5e9a2ea803e
+
+
+## retrieve the logs 
+
+docker logs 44e734df3f92540aca60137d175e5b6631b3181cfab2d9afbb2ea5e9a2ea803e
+
+## TechTrends logs
+BAD_REQUEST -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:17] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:14:25] "GET /create HTTP/1.1" 200 -
+static/css/main.css HTTP/1.1" 304 -                       create HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:15:37] "GET /static/css/main.css HTTP/1.1" 304 -static/css/main.css HTTP/1.1" 304 -
+DEBUG:app:Fri Dec 30 08:15:40 2022, Post "on port 7111" was retrieved.
+DEBUG:app:Fri Dec 30 08:15:40 2022, Post "on port 7111" was retrieved.
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:15:40] "GET /7 HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:15:40] "GET /7 HTTP/1.1" 200 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:15:40] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:172.17.0.1 - - [30/Dec/2022 08:15:40] "GET /static/css/main.css HTTP/1.1" 304 -
+ 
+## tag the image 
+
+docker tag techtrends ernynany/techtrends:v1.0.0
+
+## Docker push the images to dockerhub 
+
+docker push ernynany/techtrends:v1.0.0
+
+The push refers to repository [docker.io/ernynany/techtrends]
+cc9f3e418d44: Pushed
+b22588431674: Pushed 
+3793841919b8: Pushed 
+adf4f7dc7177: Pushed
+757468f9631a: Mounted from library/python 
+7935c88eee12: Mounted from library/python
+cfbad9ad8a53: Mounted from library/python
+248397b6b856: Mounted from library/python
+fa1175420e6f: Mounted from library/python 
+bb2453e12947: Mounted from library/python
+7354e83da007: Mounted from library/python
+c284f546974c: Mounted from library/python
+4efcd4003c84: Mounted from library/python
+v1.0.0: digest: sha256:6d27f9c9f66c8aa4aee94475d4c05c2fd0a4024aa0d4ffdda5a129ccaf5d5275 size: 3052
