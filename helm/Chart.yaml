@@ -1,0 +1,10 @@
+apiVersion: v0
+name: techtrends
+description: techtrends using kubernetes/helm 
+keywords:
+- python
+- techtrends 
+version: 3.7.0
+maintainers:
+- name: ernynany
+  email: doct2wise@gmail.com
