@@ -141,14 +141,12 @@ vim argocd-server-nodeport.yaml
 kubectl apply -f argocd-server-nodeport.yaml
 
 ## access the ARGOCD UI
-https://192.168.50.4:30008 or http://192.168.50.4:30007 
+https://192.168.0.13:30008 or http://192.168.0.13:30007 
 
 ## Login and password
 username: admin
 
 password: run command kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-
-type in the gebnerated command
 
 ## Create, vim and Apply staging and prod yaml files
 touch helm-techtrends-staging.yaml
